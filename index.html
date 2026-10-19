@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffe6f0" />
+    <title>Happy Birthday, Sayangkuu 💗</title>
+
+    <style>
+      :root {
+        --pink: #f7a8c4;
+        --pink-deep: #d85d8b;
+        --pink-soft: #fff0f6;
+        --cream: #fffaf7;
+        --ink: #684454;
+        --shadow: 0 18px 55px rgba(175, 80, 119, 0.16);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--ink);
+        font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+        background:
+          linear-gradient(
+            135deg,
+            rgba(255, 235, 244, 0.7),
+            rgba(255, 249, 250, 0.72)
+          ),
+          url("bg1.jpg") center / cover fixed no-repeat,
+          #ffeaf2;
+        overflow-x: hidden;
+      }
+
+      body.opened {
+        background:
+          linear-gradient(
+            135deg,
+            rgba(255, 232, 243, 0.78),
+            rgba(255, 249, 250, 0.78)
+          ),
+          url("bg2.jpeg") center / cover fixed no-repeat,
+          #ffeaf2;
+      }
+
+      button,
+      audio,
+      video {
+        font: inherit;
+      }
+
+      button:focus-visible,
+      audio:focus-visible,
+      video:focus-visible {
+        outline: 3px solid #bf4f80;
+        outline-offset: 4px;
+      }
+
+      /* LAYOUT UTAMA */
+
+      .page-shell {
+        width: min(100% - 28px, 940px);
+        margin: 0 auto;
+        padding: 28px 0 56px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .glass-card {
+        position: relative;
+        overflow: hidden;
+        padding: clamp(22px, 5vw, 48px);
+        border: 1px solid rgba(255, 255, 255, 0.85);
+        border-radius: 30px;
+        background: rgba(255, 250, 252, 0.84);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      .glass-card::before,
+      .glass-card::after {
+        content: "✿";
+        position: absolute;
+        color: rgba(226, 118, 160, 0.22);
+        font-size: 78px;
+        pointer-events: none;
+      }
+
+      .glass-card::before {
+        top: -15px;
+        left: 12px;
+        transform: rotate(-20deg);
+      }
+
+      .glass-card::after {
+        bottom: -28px;
+        right: 14px;
+        transform: rotate(18deg);
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        color: var(--pink-deep);
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        font-size: 0.72rem;
+        font-weight: 800;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: Georgia, "Times New Roman", serif;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.15rem, 7vw, 4.5rem);
+        line-height: 1.06;
+        color: #b94d7b;
+        text-wrap: balance;
+      }
+
+      h2 {
+        margin: 0 0 16px;
+        color: #b94d7b;
+        font-size: clamp(1.8rem, 5vw, 3rem);
+        line-height: 1.15;
+        text-wrap: balance;
+      }
+
+      h3 {
+        color: #b94d7b;
+      }
+
+      p {
+        line-height: 1.8;
+      }
+
+      .center {
+        text-align: center;
+      }
+
+      .subtitle {
+        max-width: 560px;
+        margin: 18px auto 0;
+        color: #876575;
+      }
+
+      /* HALAMAN PEMBUKA */
+
+      .hero-art {
+        font-size: clamp(3.5rem, 10vw, 6rem);
+        margin: 6px 0 16px;
+        filter: drop-shadow(0 9px 12px rgba(214, 93, 139, 0.18));
+        animation: bob 3.2s ease-in-out infinite;
+      }
+
+      .button-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 26px;
+      }
+
+      .btn {
+        border: 0;
+        border-radius: 999px;
+        padding: 13px 22px;
+        cursor: pointer;
+        font-weight: 800;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 24px rgba(201, 79, 126, 0.2);
+      }
+
+      .btn-primary {
+        color: white;
+        background: linear-gradient(135deg, #e981aa, #c95182);
+      }
+
+      .btn-secondary {
+        color: #b94d7b;
+        background: #ffe4ef;
+        border: 1px solid #f8c4d8;
+      }
+
+      .tiny-note {
+        font-size: 0.84rem;
+        color: #987b89;
+        margin-top: 18px;
+      }
+
+      /* UCAPAN ULANG TAHUN */
+
+      #message {
+        display: none;
+      }
+
+      #message.visible {
+        display: block;
+        animation: fadeUp 0.85s ease both;
+      }
+
+      .letter {
+        margin: 24px auto 0;
+        max-width: 740px;
+        padding: clamp(20px, 4vw, 34px);
+        background: rgba(255, 255, 255, 0.76);
+        border: 1px solid #f8d7e4;
+        border-radius: 22px;
+        text-align: left;
+      }
+
+      .letter p {
+        margin: 0 0 14px;
+      }
+
+      .signature {
+        color: #b94d7b;
+        font-family: Georgia, serif;
+        font-size: 1.3rem;
+        font-style: italic;
+      }
+
+      /* JUDUL SETIAP BAGIAN */
+
+      .section-block {
+        margin-top: 38px;
+      }
+
+      .section-heading {
+        text-align: center;
+        margin-bottom: 22px;
+      }
+
+      .section-heading p {
+        max-width: 540px;
+        margin: 8px auto 0;
+        color: #8d6d7e;
+      }
+
+      /* GALERI FOTO SCRAPBOOK */
+
+      .scrapbook {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(12px, 2.5vw, 24px);
+        align-items: start;
+      }
+
+      .polaroid {
+        min-width: 0;
+        padding: 10px 10px 16px;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 10px 28px rgba(119, 63, 87, 0.15);
+        transform: rotate(var(--tilt, 0deg));
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+
+      .polaroid:nth-child(2n) {
+        --tilt: 2.5deg;
+      }
+
+      .polaroid:nth-child(3n) {
+        --tilt: -2.5deg;
+      }
+
+      .polaroid:hover {
+        transform: rotate(0deg) translateY(-5px);
+        box-shadow: 0 18px 32px rgba(119, 63, 87, 0.2);
+      }
+
+      .polaroid img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 4 / 5;
+        object-fit: cover;
+        background: #ffe7f0;
+        border-radius: 3px;
+      }
+
+      .polaroid figcaption {
+        padding: 12px 3px 0;
+        text-align: center;
+        font-family: Georgia, serif;
+        color: #9b5876;
+        font-size: clamp(0.78rem, 2vw, 1rem);
+      }
+
+      /* VIDEO KENANGAN */
+
+      .memory-video {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 12px;
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: var(--shadow);
+        transform: rotate(-0.4deg);
+      }
+
+      .memory-video video {
+        display: block;
+        width: 100%;
+        max-height: 460px;
+        aspect-ratio: 16 / 9;
+        object-fit: contain;
+        background: #311b28;
+        border-radius: 12px;
+      }
+
+      .video-caption {
+        text-align: center;
+        margin: 14px 0 2px;
+        color: #9b5876;
+        font-family: Georgia, serif;
+      }
+
+      /* NOTA KUE ESTETIK */
+      .receipt-card {
+        max-width: 440px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #fff7fb;
+        border: 1px solid #f3c8dc;
+        border-radius: 24px;
+        box-shadow: 0 12px 35px rgba(190, 80, 130, 0.12);
+        text-align: center;
+      }
+
+      .receipt-image {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 14px;
+        margin-bottom: 18px;
+      }
+
+      .receipt-download {
+        display: inline-block;
+        padding: 13px 22px;
+        border-radius: 30px;
+        background: #e99abb;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.2s ease;
+      }
+
+      .receipt-download:hover {
+        background: #d979a2;
+        transform: translateY(-2px);
+      }
+
+      /* MUSIK */
+
+      .music-card {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 17px 20px;
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid #f6d4e1;
+        border-radius: 18px;
+      }
+
+      .music-icon {
+        font-size: 1.9rem;
+      }
+
+      audio {
+        width: min(100%, 390px);
+        height: 40px;
+      }
+
+      .footer-note {
+        margin: 38px 0 0;
+        text-align: center;
+        color: #9d7b8a;
+        font-size: 0.84rem;
+      }
+
+      /* ANIMASI HATI BERJATUHAN */
+
+      .floating-layer {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 3;
+      }
+
+      .floaty {
+        position: absolute;
+        top: -45px;
+        left: var(--left);
+        font-size: var(--size);
+        opacity: 0.8;
+        animation: fall var(--duration) linear forwards;
+        filter: drop-shadow(0 2px 3px rgba(193, 71, 119, 0.15));
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      /* ANIMASI */
+
+      @keyframes bob {
+        0%,
+        100% {
+          transform: translateY(0) rotate(-2deg);
+        }
+
+        50% {
+          transform: translateY(-9px) rotate(2deg);
+        }
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fall {
+        to {
+          transform: translate3d(var(--drift), 110vh, 0) rotate(420deg);
+          opacity: 0.05;
+        }
+      }
+
+      /* TAMPILAN HP */
+
+      @media (max-width: 620px) {
+        .page-shell {
+          width: min(100% - 18px, 940px);
+          padding: 12px 0 32px;
+        }
+
+        .glass-card {
+          border-radius: 23px;
+          padding: 25px 17px;
+        }
+
+        .scrapbook {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 14px;
+        }
+
+        .polaroid {
+          padding: 7px 7px 12px;
+        }
+
+        .polaroid figcaption {
+          padding-top: 9px;
+        }
+
+        .section-block {
+          margin-top: 30px;
+        }
+
+        .btn {
+          width: 100%;
+          max-width: 320px;
+        }
+
+        body,
+        body.opened {
+          background-attachment: scroll;
+        }
+      }
+
+      /* PENGATURAN UNTUK PENGGUNA YANG MEMBATASI ANIMASI */
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- TEMPAT ANIMASI HATI -->
+    <div class="floating-layer" id="floatingLayer" aria-hidden="true"></div>
+
+    <main class="page-shell">
+      <!-- HALAMAN PEMBUKA -->
+      <section class="glass-card center" id="intro">
+        <p class="eyebrow"></p>
+
+        <div class="hero-art" aria-hidden="true">🎂💗</div>
+
+        <h1>
+          Happy Birthday<br />
+          Sayangku! 🎉
+        </h1>
+
+        <p class="subtitle">
+          Ada sesuatu yang kecil, tapi dibuat dengan banyak cinta khusus untuk
+          ayang. Siap buka hadiahnya? 💌
+        </p>
+
+        <div class="button-row">
+          <button
+            class="btn btn-primary"
+            id="openButton"
+            type="button"
+            onclick="openGift()"
+          >
+            Buka Hadiah 💝
+          </button>
+        </div>
+
+        <p class="tiny-note">
+          dibuat khusus untuk ayang, dengan sepenuh hati ♡
+        </p>
+      </section>
+
+      <!-- HALAMAN UCAPAN -->
+      <section class="glass-card" id="message" aria-live="polite">
+        <div class="center">
+          <p class="eyebrow">today is all about you ♡</p>
+
+          <h2>Selamat Ulang Tahun, Sayangkuu Bahenol! 😚💖</h2>
+
+          <p class="subtitle">
+            Hari spesial untuk seseorang yang begitu berarti.
+          </p>
+        </div>
+
+        <div class="letter">
+          <p>
+            Semoga di usia yang baru ini, sayang selalu diberikan kesehatan,
+            kebahagiaan, dan kemudahan dalam setiap langkah. Semoga rezekinya
+            semakin lancar, menjadi pribadi yang lebih baik, dan terus semangat
+            belajar untuk meraih semua impian🥰.
+          </p>
+
+          <p>
+            Semoga semua impian ayang perlahan menjadi kenyataan, segala urusan
+            dilancarkan, dan selalu ada banyak alasan untuk tersenyum setiap
+            harinya. ✨
+          </p>
+
+          <p>
+            Terima kasih sudah menjadi diri sendiri. Semoga hari ini dipenuhi
+            hal-hal indah dan kenangan yang menyenangkan. Semoga kebahagiaan
+            selalu menyertai setiap langkah sayangku. 🌷
+          </p>
+
+          <p>
+            Tidak disangka, di usia ayangg yang sudah 23 tahun inii, omakk dah
+            tuanyaa! 😆 Di usia 23 tahun ini, bertepatan juga dengan tiga
+            tahunnya kita bersama. Tidak terasa kita sudah sampai di titik ini.
+            Sudah banyak hal yang kita lalui, banyak kata maaf, perjuangan, dan
+            pengorbanan selama menjalani hubungan ini.
+          </p>
+
+          <p>
+            Terima kasih sudah bertahan dan berjalan bersama sampai sejauh ini.
+            Semoga kita bisa terus belajar memahami satu sama lain, saling
+            mendukung, dan menjaga hubungan ini menjadi lebih baik. Semoga masih
+            banyak cerita indah yang bisa kita lalui bersama yaa. ❤️
+          </p>
+
+          <p>
+            Sekali lagi, selamat ulang tahun, sayangkuu. Semoga semua doa baik
+            yang sayangg panjatkan dikabulkan satu per satu. Jangan lupa bahagia
+            dan tetap jadi sayang yang aku kenal. 💗
+          </p>
+
+          <p class="signature">With lots of love, selalu untuk ayang 💌</p>
+        </div>
+        ```
+
+        <!-- GALERI FOTO -->
+        <section class="section-block" aria-labelledby="galleryTitle">
+          <div class="section-heading">
+            <p class="eyebrow">little pieces of us</p>
+
+            <h2 id="galleryTitle">Our Little Memories 📸</h2>
+
+            <p>Potongan kenangan kecil yang selalu punya tempat istimewa.</p>
+          </div>
+
+          <div class="scrapbook">
+            <figure class="polaroid">
+              <img
+                src="WhatsApp Image 2026-10-19 at 15.17.14.jpeg"
+                alt="Kenangan pertama"
+                loading="lazy"
+              />
+              <figcaption>my favorite memory ♡</figcaption>
+            </figure>
+
+            <figure class="polaroid">
+              <img
+                src="WhatsApp Image 2026-10-19 at 15.17.17.jpeg"
+                alt="Kenangan kedua"
+                loading="lazy"
+              />
+              <figcaption>you make me smile 💗</figcaption>
+            </figure>
+
+            <figure class="polaroid">
+              <img
+                src="WhatsApp Image 2026-10-19 at 15.17.15 (2).jpeg"
+                alt="Kenangan ketiga"
+                loading="lazy"
+              />
+              <figcaption>little moment, big love ✨</figcaption>
+            </figure>
+
+            <figure class="polaroid">
+              <img
+                src="WhatsApp Image 2026-10-19 at 15.17.15.jpeg"
+                alt="Kenangan keempat"
+                loading="lazy"
+              />
+              <figcaption>one for the memories 🌷</figcaption>
+            </figure>
+
+            <figure class="polaroid">
+              <img
+                src="WhatsApp Image 2026-10-19 at 15.17.16 (1).jpeg"
+                alt="Kenangan kelima"
+                loading="lazy"
+              />
+              <figcaption>my happy place 🧸</figcaption>
+            </figure>
+
+            <figure class="polaroid">
+              <img
+                src="WhatsApp Image 2026-10-19 at 15.17.16 (2).jpeg"
+                alt="Kenangan keenam"
+                loading="lazy"
+              />
+              <figcaption>to more moments together 💞</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <!-- VIDEO KENANGAN -->
+        <section class="section-block" aria-labelledby="videoTitle">
+          <div class="section-heading">
+            <p class="eyebrow">press play & smile</p>
+
+            <h2 id="videoTitle">A Little Video for You 🎬</h2>
+          </div>
+
+          <div class="memory-video">
+            <video
+              controls
+              playsinline
+              preload="metadata"
+              poster="video-poster.jpg"
+            >
+              <source src="video.mp4" type="video/mp4" />
+
+              Browser kamu belum mendukung pemutaran video.
+            </video>
+
+            <p class="video-caption">
+              semoga kita punya lebih banyak cerita indah ♡
+            </p>
+          </div>
+        </section>
+
+        <!-- NOTA PENGAMBILAN KUE -->
+        <section class="section-block" id="notaKue">
+          <div class="section-heading">
+            <p class="eyebrow">a little sweet surprise 🎀</p>
+            <h2>Nota Pengambilan Kue 🎂</h2>
+            <p>Simpan nota kecil ini untuk pengambilan kue yaa sayangg ♡</p>
+            <p>Alamatnya Elna di Depan Budiman</p>
+          </div>
+
+          <div class="receipt-card">
+            <img
+              class="receipt-image"
+              src="nota.jpeg"
+              alt="Foto nota pengambilan kue"
+            />
+
+            <a
+              class="receipt-download"
+              href="foto-nota.png"
+              download="nota-pengambilan-kue.png"
+            >
+              ⬇ Download Foto Nota 🎀
+            </a>
+          </div>
+        </section>
+        <!-- AKHIR NOTA KUE -->
+
+        <!-- MUSIK -->
+        <section class="section-block" aria-labelledby="musicTitle">
+          <div class="section-heading">
+            <p class="eyebrow">a soft little soundtrack</p>
+
+            <h2 id="Photograph">A Song for You 🎶</h2>
+
+            <p>
+              Tekan play kalau ingin mendengarkan musik sambil membaca pesan
+              ini.
+            </p>
+          </div>
+
+          <div class="music-card">
+            <span class="music-icon" aria-hidden="true">🎧💗</span>
+
+            <div>
+              <strong>Our little soundtrack</strong>
+
+              <div class="tiny-note">
+                musik diputar setelah kamu menekan play
+              </div>
+            </div>
+
+            <audio controls loop preload="none">
+              <source
+                src="Edd_Sheeran_-_photograph._(mp3.pm).mp3"
+                type="audio/mpeg"
+              />
+              Browser kamu belum mendukung audio.
+            </audio>
+          </div>
+        </section>
+
+        <p class="footer-note">made with love, just for you ♡ 🌷</p>
+      </section>
+    </main>
+
+    <!-- JAVASCRIPT -->
+    <script>
+      const decorations = ["💖", "💕", "✨", "🌸", "🎉", "💗", "❤️", "🥰"];
+
+      let decorationTimer;
+
+      // FUNGSI TOMBOL BUKA HADIAH
+      function openGift() {
+        const intro = document.getElementById("intro");
+        const message = document.getElementById("message");
+
+        intro.classList.add("hidden");
+        message.classList.add("visible");
+
+        document.body.classList.add("opened");
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+
+        document
+          .getElementById("openButton")
+          .setAttribute("aria-expanded", "true");
+
+        // Memunculkan hati saat hadiah dibuka
+        releaseDecorations(24);
+
+        // Hati tambahan muncul secara berkala
+        if (!decorationTimer) {
+          decorationTimer = window.setInterval(() => {
+            releaseDecorations(3);
+          }, 1800);
+        }
+      }
+
+      // FUNGSI ANIMASI HATI BERJATUHAN
+      function releaseDecorations(amount = 8) {
+        const layer = document.getElementById("floatingLayer");
+
+        for (let i = 0; i < amount; i++) {
+          const item = document.createElement("span");
+
+          item.className = "floaty";
+
+          item.textContent =
+            decorations[Math.floor(Math.random() * decorations.length)];
+
+          item.style.setProperty("--left", `${Math.random() * 100}%`);
+
+          item.style.setProperty("--size", `${16 + Math.random() * 18}px`);
+
+          item.style.setProperty("--duration", `${4 + Math.random() * 4}s`);
+
+          item.style.setProperty("--drift", `${Math.random() * 140 - 70}px`);
+
+          layer.appendChild(item);
+
+          window.setTimeout(() => {
+            item.remove();
+          }, 8500);
+        }
+      }
+
+      // FOTO YANG BELUM DIISI AKAN DISEMBUNYIKAN
+      document.querySelectorAll(".polaroid img").forEach((img) => {
+        img.addEventListener("error", () => {
+          img.closest(".polaroid").classList.add("hidden");
+        });
+      });
+    </script>
+  </body>
+</html>
